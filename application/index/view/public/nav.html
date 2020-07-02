@@ -1,0 +1,26 @@
+<div class="nav">
+    <div class="main">
+        <a href=""><img src="__STATIC__/index/images/icon.jpg"></a>
+        <span class="wang">laobophp.cn</span>
+        <ul class="layui-nav">
+            <li class="layui-nav-item"><a href="{:url('Index/index')}">首页</a></li>
+            <li class="layui-nav-item">
+                <a href="{:url('Article/article')}">学无止境</a>
+                <dl class="layui-nav-child">
+                    {volist name="category" id="vo"}
+                    <dd><a href="{:url('Category/category')}?id={$vo.id}">{$vo.catename}</a></dd>
+                    {/volist}
+                </dl>
+            </li>
+            <li class="layui-nav-item">
+                <a href="{:url('Enjoy/enjoy')}">分享无价</a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="{:url('Example/example')}">案例展示</a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="{:url('About/about')}">关于</a>
+            </li>
+        </ul>
+    </div>
+</div>

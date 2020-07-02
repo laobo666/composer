@@ -1,0 +1,58 @@
+{include file="public/header" /}
+<body>
+    <form class="layui-form">
+        <input type="hidden" name="id" value="{$link.id}">
+        <div class="layui-form-item">
+            <label class="layui-form-label">链接名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="name" class="layui-input" value="{$link.name}">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">链接地址</label>
+            <div class="layui-input-block">
+                <input type="text" name="url" class="layui-input" value="{$link.url}">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button type="button" class="layui-btn" onclick="save()">保存</button>
+            </div>
+        </div>
+    </form>
+
+   {include file="public/base_js" /}
+   <script type="text/javascript">
+       layui.use(['form', 'layer'], function () {
+           var form = layui.form,
+               layer = layui.layer;
+           $ = layui.jquery;
+       })
+       
+       function save() {
+           var name = $('input[name="name"]').val();
+           var url = $('input[name="url"]').val();
+           
+           if (name == '') {
+               layer.msg('链接名称不能为空', {icon: 2, anim: 6});
+               return false;
+           }
+           if (url == '') {
+               layer.msg('链接地址不能为空', {icon: 2, anim: 6});
+               return false;
+           }
+           
+           $.post('{:url("save")}', $('form').serialize(), function (res) {
+               if (res.status == 1) {
+                   layer.msg(res.message, {icon: 1, anim: 6});
+                   setTimeout(function () {
+                       parent.window.location.reload();
+                   }, 1000);
+               } else {
+                   layer.msg(res.message, {icon: 2, anim: 6});
+               }
+           }, 'json');
+       }
+   </script>
+</body>
+</html>

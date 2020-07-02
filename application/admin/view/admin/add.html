@@ -1,0 +1,69 @@
+{include file="public/header" /}
+<body>
+    <form class="layui-form">
+        <input type="hidden" name="id" value="{$admin.id}">
+        <div class="layui-form-item">
+            <div class="layui-form-label">用户名</div>
+            <div class="layui-input-block">
+                <input type="text" name="username" class="layui-input" value="{$admin.username}">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-form-label">密码</div>
+            <div class="layui-input-block">
+                <input type="password" name="password" class="layui-input" value="{$admin.password}">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-form-label">真实姓名</div>
+            <div class="layui-input-block">
+                <input type="text" name="truename" class="layui-input" value="{$admin.truename}">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button type="button" class="layui-btn" onclick="save()">保存</button>
+            </div>
+        </div>
+    </form>
+
+    {include file="public/base_js" /}
+    <script type="text/javascript">
+        layui.use(['form', 'layer'], function () {
+            var form = layui.form,
+                layer = layui.layer;
+            $ = layui.jquery;
+        })
+        
+        function save() {
+            var username = $('input[name="username"]').val();
+            var password = $('input[name="password"]').val();
+            var truename = $('input[name="truename"]').val();
+            
+            if (username == '') {
+                layer.msg('用户名不能为空', {icon: 2, anim: 6});
+                return false;
+            }
+            if (password == '') {
+                layer.msg('密码不能为空', {icon: 2, anim: 6});
+                return false;
+            }
+            if (truename == '') {
+                layer.msg('真实姓名不能为空', {icon: 2, anim: 6});
+                return false;
+            }
+            
+            $.post('{:url("save")}', $('form').serialize(), function (res) {
+                if (res.status == 1) {
+                    layer.msg(res.message, {icon: 1, anim: 6});
+                    setTimeout(function () {
+                        parent.window.location.reload();
+                    }, 1000);
+                } else {
+                    layer.msg(res.message, {icon: 2, anim: 6});
+                }
+            }, 'json');
+        }
+    </script>
+</body>
+</html>

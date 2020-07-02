@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>老博博客</title>
+    {load file="__STATIC__/index/css/enjoy/enjoy.css" /}
+    {load file="__STATIC__/index/layui/css/layui.css" /}
+    {load file="__STATIC__/index/layui/layui.js" /}
+</head>
+
+<body>
+    {include file="public/nav" /}
+    <div class="content">
+        <div class="nav">
+            <a href="" class="green">a</a>
+            <a href="{:url('Index/index')}" class="index">首页</a>&nbsp;—
+            <a href="{:url('Example/example')}">案例展示</a>
+        </div>
+        <div class="item">
+            <div class="left">
+                <h2>博客网站</h2>
+                <img src="__STATIC__/index/images/blog.png">
+            </div>
+            <div class="right">
+                <h2>企业站点</h2>
+                <img src="__STATIC__/index/images/company.png">
+            </div>
+        </div>
+    </div>
+    {include file="public/footer" /}
+</body>
+</html>

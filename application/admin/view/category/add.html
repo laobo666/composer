@@ -1,0 +1,47 @@
+{include file="public/header" /}
+<body>
+    <form class="layui-form">
+        <input type="hidden" name="id" value="{$category.id}">
+        <div class="layui-form-item">
+            <label class="layui-form-label">分类名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="catename" class="layui-input" value="{$category.catename}">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button type="button" class="layui-btn" onclick="save()">保存</button>
+            </div>
+        </div>
+    </form>
+
+    {include file="public/base_js" /}
+    <script type="text/javascript">
+        layui.use(['form', 'layer'], function () {
+            var form = layui.form,
+                layer = layui.layer;
+            $ = layui.jquery;
+        })
+        
+        function save() {
+            var catename = $('input[name="catename"]').val();
+            
+            if (catename == '') {
+                layer.msg('分类名称不能为空', {icon: 2, anim: 6});
+                return false;
+            }
+            
+            $.post('{:url("save")}', $('form').serialize(), function (res) {
+                if (res.status == 1) {
+                    layer.msg(res.message, {icon: 1, anim: 6});
+                    setTimeout(function () {
+                        parent.window.location.reload();
+                    }, 1000);
+                } else {
+                    layer.msg(res.message, {icon: 2, anim: 6});
+                }
+            }, 'json');
+        }
+    </script>
+</body>
+</html>

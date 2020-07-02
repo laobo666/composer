@@ -1,0 +1,62 @@
+{include file="public/header" /}
+<body>
+    <div class="header">
+        <span>站长信息</span>
+        <a href="javascript:location.replace(location.href)">
+            <i class="layui-icon layui-icon-refresh"></i>
+        </a>
+        <hr>
+    </div>
+    <form class="layui-form system">
+        <input type="hidden" name="id" value="{$laobo.id}">
+        <div class="layui-form-item">
+            <label class="layui-form-label"><span>*</span>站长名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="name" class="layui-input" value="{$laobo.name}">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"><span>*</span>站长职业</label>
+            <div class="layui-input-block">
+                <input type="text" name="pro" class="layui-input" value="{$laobo.pro}">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"><span>*</span>站长座右铭</label>
+            <div class="layui-input-block">
+                <input type="text" name="remark" class="layui-input" value="{$laobo.remark}">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"><span>*</span>站长QQ</label>
+            <div class="layui-input-block">
+                <input type="text" name="qq" class="layui-input" value="{$laobo.qq}">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <button type="button" class="layui-btn" onclick="save()">保存</button>
+        </div>
+    </form>
+    
+    {include file="public/base_js" /}
+    <script type="text/javascript">
+        layui.use(['form', 'layer'], function () {
+            var form = layui.form;
+            $ = layui.jquery;
+        });
+        
+        function save() {
+            $.post('{:url("save")}', $('form').serialize(), function (res) {
+                if (res.status == 1) {
+                    layer.msg(res.message, {icon: 1, anim: 6});
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 1000);
+                } else {
+                    layer.msg(res.message, {icon: 2, anim: 6});
+                }
+            }, 'json');
+        }
+    </script>
+</body>
+</html>

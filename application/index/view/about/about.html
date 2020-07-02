@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>老博博客</title>
+    {load file="__STATIC__/index/css/about/about.css" /}
+    {load file="__STATIC__/index/layui/css/layui.css" /}
+    {load file="__STATIC__/index/layui/layui.js" /}
+</head>
+<body>
+    {include file="public/nav" /}
+    <div class="content">
+        <div class="nav">
+            <a href="" class="green">a</a>
+            <a href="{:url('Index/index')}" class="index">首页</a>&nbsp;—
+            <a href="{:url('About/about')}">关于</a>
+        </div>
+        <div class="item">
+            <div class="left">
+                <h2>联系QQ</h2>
+                <div class="line"></div>
+                <img src="__STATIC__/index/images/qq.png">
+            </div>
+            <div class="right">
+                <div class="top">
+                    <h2>关于老博</h2>
+                    <div class="line"></div>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;大家好，欢迎来到老博博客！老博，其实并不老。今年20了，是一名即将实习的学生。对PHP和WEB前端有着深厚的兴趣，一直在不断地探索钻研。这个博客是老博的第一个个人博客，将会记录老博生涯的点点滴滴，感谢来访与关注！</p>
+                </div>
+                <div class="bottom">
+                    <h2>关于老博博客</h2>
+                    <div class="line"></div>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;老博博客是用TP5.0+Layui做的，简单方便，没有复杂的功能，就是一个简单的博客系统。做这个博客的原因也很简单，就是想把自己在学习中踩过的坑分享给大家，把一些PHP的经验和大家分享。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {include file="public/footer" /}
+</body>
+</html>

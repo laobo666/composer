@@ -1,0 +1,72 @@
+<div class="public">
+    <p>老博博客&nbsp;©&nbsp;&nbsp;laobophp.com</p><br>
+    <p>Powered by laobo</p><br>
+    <p>生活不易，多多支持</p>
+</div>
+<div class="show">
+    <i class="layui-icon layui-icon-right"></i>
+</div>
+<div class="scroll">
+    <a onclick="window.scroll(0, 0)">
+        <i class="layui-icon layui-icon-top"></i>
+    </a>
+</div>
+<div class="side">
+    <ul class="layui-nav layui-bg-green">
+        <li class="layui-nav-item"><a href="{:url('Index/index')}">首页</a></li>
+        <li class="layui-nav-item">
+            <a href="javascript:void(0);">学无止境</a>
+            <dl class="layui-nav-child">
+                {volist name="category" id="vo"}
+                <dd><a href="{:url('Category/category')}?id={$vo.id}">{$vo.catename}</a></dd>
+                {/volist}
+            </dl>
+        </li>
+        <li class="layui-nav-item">
+            <a href="{:url('Enjoy/enjoy')}">分享无价</a>
+        </li>
+        <li class="layui-nav-item">
+            <a href="{:url('Example/example')}">案例展示</a>
+        </li>
+        <li class="layui-nav-item">
+            <a href="{:url('About/about')}">关于</a>
+        </li>
+    </ul>
+    <div class="opacity"></div>
+</div>
+
+<script type="text/javascript">
+    layui.use(['element', 'form'], function () {
+        var element = layui.element,
+            form = layui.form,
+            $ = layui.jquery;
+        
+        $(function () {
+            $(window).scroll(function () {
+                var top = $(this).scrollTop();
+                if (top > 200) {
+                    $('.scroll').css('display', 'block');
+                } else {
+                    $('.scroll').css('display', 'none');
+                }
+            });
+            $('.article .list .category ol li').hover(function () {
+                $(this).css('background', '#009688');
+                $(this).css('border', '1px solid #009688');
+            }, function () {
+                $(this).css('background', '#ffffff');
+                $(this).css('border', '1px solid #C9C9C9');
+            });
+            $('.show').click(function () {
+                $('.side').show();
+                $('.side .layui-nav').show();
+                $(this).hide();
+            });
+            $('.opacity').click(function () {
+                $('.side').hide();
+                $('.side .layui-nav').hide();
+                $('.show').show();
+            });
+        });
+    });
+</script>

@@ -1,0 +1,90 @@
+{include file="public/header" /}
+<body>
+    <div class="header">
+        <span>管理员列表</span>
+        <button class="layui-btn layui-btn-sm" onclick="add()">添加</button>
+        <hr>
+    </div>
+    <table class="layui-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>用户名</th>
+                <th>真实姓名</th>
+                <th>角色</th>
+                <th>状态</th>
+                <th>创建时间</th>
+                <th>最后登录时间</th>
+                <th>登录次数</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {volist name="admin" id="vo"}
+            <tr>
+                <td>{$vo.id}</td>
+                <td>{$vo.username}</td>
+                <td>{$vo.truename}</td>
+                <td>
+                    {if $vo.roles == 1}
+                    系统管理员
+                    {else /}
+                    开发人员
+                    {/if}
+                </td>
+                <td>
+                    {if $vo.status == 1}
+                    正常
+                    {else /}
+                    <span style="color: red">禁用</span>
+                    {/if}
+                </td>
+                <td>{$vo.create_time}</td>
+                <td>{$vo.last_time}</td>
+                <td>{$vo.login_count}</td>
+                <td>
+                    <button class="layui-btn layui-btn-warm layui-btn-xs" onclick="add({$vo.id})">编辑</button>
+                    <button class="layui-btn layui-btn-danger layui-btn-xs" onclick="del({$vo.id})">删除</button>
+                </td>
+            </tr>
+            {/volist}
+        </tbody>
+    </table>
+
+    {include file="public/base_js" /}
+    <script type="text/javascript">
+        layui.use(['layer'], function () {
+            var layer = layui.layer;
+            $ = layui.jquery;
+        })
+        
+        function add(id) {
+            layer.open({
+                type: 2,
+                title: id > 0 ? '编辑管理员' : '添加管理员',
+                area: ['400px', '300px'],
+                shade: 0,
+                content: 'add.html?id=' + id
+            })
+        }
+
+        function del(id) {
+            layer.confirm('确定要删除吗', {
+                icon: 3,
+                btn: ['确定', '取消']
+            }, function () {
+                $.post('{:url("delete")}', {'id': id}, function (res) {
+                    if (res.status == 1) {
+                        layer.msg(res.message, {icon: 1, anim: 6});
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 1000);
+                    } else {
+                        layer.msg(res.message, {icon: 2, anim: 6});
+                    }
+                }, 'json');
+            });
+        }
+    </script>
+</body>
+</html>

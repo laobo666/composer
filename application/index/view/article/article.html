@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>老博博客</title>
+    {load file="__STATIC__/index/css/article/article.css" /}
+    {load file="__STATIC__/index/layui/css/layui.css" /}
+    {load file="__STATIC__/index/layui/layui.js" /}
+</head>
+<body>
+    {include file="public/nav" /}
+    <div class="content">
+        <div class="nav">
+            <a href="" class="green">a</a>
+            <a href="{:url('Index/index')}" class="index">首页</a>&nbsp;—
+            <a href="{:url('Article/article')}">学无止境</a>
+        </div>
+        <div class="article">
+            <div class="list">
+                <div class="category">
+                    <h3>栏目导航</h3>
+                    <hr class="layui-bg-green">
+                    <ol>
+                        {volist name="category" id="vo"}
+                        <li><a href="{:url('Category/category')}?id={$vo.id}">{$vo.catename}</a></li>
+                        {/volist}
+                    </ol>
+                </div>
+                <div class="center">
+                    <h3>最新文章</h3>
+                    <hr class="layui-bg-green">
+                    {volist name="data" id="vo"}
+                    <p>{$vo.id}.{$vo.title}&nbsp;<span>{$vo.heat}℃</span></p>
+                    {/volist}
+                </div>
+                <div class="bottom">
+                    <h3>打赏老博</h3>
+                    <hr class="layui-bg-green">
+                    <img src="__STATIC__/index/images/vx.png" alt="aaa">
+                    <img src="__STATIC__/index/images/zfb.png" alt="aaa">
+                </div>
+                <div class="footer">
+                    <h3>友情链接</h3>
+                    <hr class="layui-bg-green">
+                    {volist name="link" id="vo"}
+                    <a href="{$vo.url}">{$vo.name}</a>
+                    {/volist}
+                </div>
+            </div>
+            <div class="data">
+                {volist name="article" id="vo"}
+                <div class="item">
+                    <img src="{$vo.img}">
+                    <div class="text">
+                        <h3>{$vo.title}</h3>
+                        <span>
+                            {$vo.add_time}&nbsp;&nbsp;
+                            <strong>{$vo.category.catename}</strong>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <i class="layui-icon layui-icon-chart"></i>&nbsp;{$vo.heat}℃&nbsp;&nbsp;&nbsp;&nbsp;
+                            <i class="layui-icon layui-icon-dialogue message"></i>
+                        </span>
+                        <p>{$vo.content}</p>
+                    </div>
+                </div>
+                {/volist}
+            </div>
+        </div>
+    </div>
+    {include file="public/footer" /}
+</body>
+</html>

@@ -1,0 +1,62 @@
+{include file="public/header" /}
+<body>
+    <div class="container">
+        <div class="nav">
+            <span class="title">
+                <img src="__STATIC__/admin/images/icon.jpg" alt="" style="width: 30px;height: 30px;">&nbsp;&nbsp;
+                后台管理中心
+            </span>
+            <span class="userinfo">
+                <a href="{:url('/Index/index/index')}">网站首页</a>&nbsp;&nbsp;&nbsp;
+                |&nbsp;&nbsp;
+                <a href="{:url('Index/index')}">后台首页</a>&nbsp;&nbsp;&nbsp;
+                |&nbsp;&nbsp;&nbsp;
+                <a href="{:url('Login/logout')}">退出</a>
+            </span>
+        </div>
+        <div class="menu" id="menu">
+            <ul class="layui-nav layui-nav-tree">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a href="javascript:;"><i class="layui-icon layui-icon-group" style="padding-right: 10px;font-size: 16px"></i>管理员管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" onclick="menuFire(this)" src="{:url('Admin/admin')}">管理员列表</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;"><i class="layui-icon layui-icon-list" style="padding-right: 10px;font-size: 20px"></i>博客管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" onclick="menuFire(this)" src="{:url('Category/category')}">分类管理</a></dd>
+                        <dd><a href="javascript:;" onclick="menuFire(this)" src="{:url('Article/article')}">文章管理</a></dd>
+                        <dd><a href="javascript:;" onclick="menuFire(this)" src="{:url('Link/link')}">链接管理</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;"><i class="layui-icon layui-icon-set-sm" style="padding-right: 10px;font-size: 20px"></i>系统设置</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" onclick="menuFire(this)" src="{:url('System/system')}">网站设置</a></dd>
+                        <dd><a href="javascript:;" onclick="menuFire(this)" src="{:url('Laobo/laobo')}">站长信息</a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+        <div class="main" id="main">
+            <iframe name="iframeTest" src="{:url('Index/home')}" style="width: 100%;height: 100%" frameborder="0" scrolling="no"></iframe>
+        </div>
+    </div>
+    
+    {include file="public/base_js" /}
+    <script type="text/javascript">
+        layui.use(['element', 'layer'], function () {
+            var element = layui.element,
+                layer = layui.layer;
+            $ = layui.jquery;
+        });
+        
+        // 菜单点击
+        function menuFire(obj) {
+            var src = $(obj).attr('src');
+            $('iframe').attr('src', src);
+        }
+    </script>
+</body>
+</html>
